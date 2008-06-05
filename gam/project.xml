@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project><pomVersion>3</pomVersion><extend>${basedir}/../../project.xml</extend><name>geovista-gam</name><id>gam</id><currentVersion>1.3.x</currentVersion><shortDescription>Genetic GAM</shortDescription><gumpRepositoryId>geovista</gumpRepositoryId><description>Genetic GAM</description><developers><developer><name>Jamison Conley</name><id>jfc173</id><email>jfc173@psu.edu</email><organization>GeoVista Center</organization><roles><role>Java Developer</role></roles></developer></developers><dependencies><dependency><artifactId>readers</artifactId><groupId>geovista</groupId><version>1.3.x</version></dependency><dependency><artifactId>common</artifactId><groupId>geovista</groupId><version>1.3.x</version></dependency><dependency><artifactId>main</artifactId><groupId>gt2</groupId><version>2.2.x</version></dependency><dependency><artifactId>vecmath</artifactId><groupId>vecmath</groupId><version>1.3</version></dependency>
+<dependency>
+  <artifactId>referencing</artifactId>
+   <groupId>gt2</groupId>
+   <version>2.2.x</version>
+  </dependency>
+<dependency>
+  <artifactId>api</artifactId>
+   <groupId>gt2</groupId>
+   <version>2.2.x</version>
+  </dependency>  
+  <dependency>
+    <artifactId>geotools</artifactId>
+    <groupId>geovista</groupId>
+    <version>1.3.x</version>
+  </dependency>
+<dependency><artifactId>geoapi</artifactId><groupId>geoapi</groupId><version>2.0</version></dependency><dependency><artifactId>shapefile</artifactId><groupId>gt2</groupId><version>2.2.x</version></dependency><dependency><groupId>JTS</groupId><artifactId>JTS</artifactId><version>1.6</version><url>http://www.vividsolutions.com/JTS/jts_frame.htm</url></dependency></dependencies><build><resources><resource><directory>${basedir}/src/</directory><includes><include>**/*.gif</include><include>**/*.jpg</include><include>**/*.xml</include><include>**/*.htm</include><include>**/*.html</include><include>**/*.csv</include><include>**/*.shp</include><include>**/*.dbf</include><include>**/*.shx</include></includes></resource></resources></build></project>
