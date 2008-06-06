@@ -156,15 +156,20 @@ public class InitGAMFile implements ActionListener {
       int caseIndex = id.getCaseIndex();
       Object[] numericAttributes = dsfa.getDataSetNumeric();
       Shape[] shapes = dsfa.getShapeData();
+      dataSet = new Vector();
       
-      maxX = ((int[]) numericAttributes[xIndex])[0];
-      minX = ((int[]) numericAttributes[xIndex])[0];
-      maxY = ((int[]) numericAttributes[yIndex])[0];
-      minY = ((int[]) numericAttributes[yIndex])[0];
-      
-      int size = ((double[]) numericAttributes[xIndex+1]).length;
-      long pop = 0;
-      long count = 0;
+      maxX = Integer.MIN_VALUE;
+      minX = Integer.MAX_VALUE;
+      maxY = Integer.MIN_VALUE;
+      minY = Integer.MAX_VALUE;
+      int size;
+      try{
+          size = ((int[]) numericAttributes[xIndex]).length;
+      } catch (ClassCastException cce){
+          size = ((double[]) numericAttributes[xIndex]).length;
+      }
+      double pop = 0;
+      double count = 0;
       
       for (int i = 0; i < size; i++){
           double xValue, yValue;
@@ -174,11 +179,28 @@ public class InitGAMFile implements ActionListener {
               xValue = (rect.getMaxX() + rect.getMinX()) / 2;
               yValue = (rect.getMaxY() + rect.getMinY()) / 2;              
           } else {          
-              xValue = ((double[]) numericAttributes[xIndex+1])[i];
-              yValue = ((double[]) numericAttributes[yIndex+1])[i];
+              try{
+                  xValue = ((double[]) numericAttributes[xIndex])[i];
+              } catch (ClassCastException cce){
+                  xValue = ((int[]) numericAttributes[xIndex])[i];
+              }
+              try{
+                  yValue = ((double[]) numericAttributes[yIndex])[i];
+              } catch (ClassCastException cce){
+                  yValue = ((int[]) numericAttributes[yIndex])[i];
+              }
           }
-          int cValue = ((int[]) numericAttributes[caseIndex+1])[i];
-          int pValue = ((int[]) numericAttributes[backIndex+1])[i];
+          int cValue, pValue;
+          try{
+              cValue = ((int[]) numericAttributes[caseIndex])[i];
+          } catch (ClassCastException cce){
+              cValue = (int) Math.round(100*((double[]) numericAttributes[caseIndex])[i]);  //100* b/c this is usually a double if there are percentages
+          }
+          try{
+              pValue = ((int[]) numericAttributes[backIndex])[i];
+          } catch (ClassCastException cce){
+              pValue = (int) Math.round(100*((double[]) numericAttributes[backIndex])[i]);  //100* b/c this is usually a double if there are percentages
+          }
           
           pop = pop + pValue;
           count = count + cValue;
