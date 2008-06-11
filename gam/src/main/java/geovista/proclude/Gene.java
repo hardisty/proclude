@@ -13,17 +13,17 @@ import java.awt.geom.Ellipse2D;
 
 public class Gene{
 
-  private double major;
-  private double minor;
-  private double x;
-  private double y;
-  private double fitness;
-  private double orientation;
-  private char[] bits;
-  private boolean bitsChanged;
-  private Fitness function;
-  private int count, population;
-  private int[] containedPoints;
+  double major;
+  double minor;
+  double x;
+  double y;
+  double fitness;
+  double orientation;
+  char[] bits;
+  boolean bitsChanged;
+  Fitness function;
+  int count, population;
+  int[] containedPoints;
 
   public Gene(double d1, double d2, double d3, double d4, double d5, Fitness f){
     major = d1;
