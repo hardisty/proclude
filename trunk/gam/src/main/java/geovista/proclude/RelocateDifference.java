@@ -380,8 +380,13 @@ public class RelocateDifference extends Relocation{
       Shape gShape = g.toShape();
       //IF nextInList CONTAINS g
       if (nextInListShape.contains(gShape.getBounds2D())){
-        double d = (nextInList.getCount() - g.getCount()) /
-                   (nextInList.getPopulation() - g.getPopulation());
+        double d;
+        try{
+            d = (nextInList.getCount() - g.getCount()) / (nextInList.getPopulation() - g.getPopulation());
+        } catch (ArithmeticException ae){ //divide by zero error
+            d = 0;
+        }
+                   
         // IF AREA IN nextInList BUT NOT IN g DOES NOT SATISFY DEFINITION OF CLUSTER (minFitness*expectedRate)
         // REPLACE nextInList WITH g
 //        System.out.print("nextInList: " + nextInList);
