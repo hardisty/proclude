@@ -283,7 +283,7 @@ public class InitGAMFile implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     System.out.println("InitGAMFile received an event.");
     InitDialog id = (InitDialog) e.getSource();
-    if (e.getActionCommand() == "dsfa"){
+    if (e.getActionCommand().equalsIgnoreCase("dsfa")){
         processDSFA(id);
     } else {
         int xIndex = id.getXIndex();
