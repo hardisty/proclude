@@ -95,7 +95,18 @@ public abstract class Fitness {
    */
   public int[] getContainedPoints(){
     if (useContainedPoints){
-      return containedPoints;
+      //this is for trimming the array down to size.
+      int n = 0;
+      for (int i = 0; i < containedPoints.length; i++){
+          if (containedPoints[i] != -1){
+              n++;
+          }
+      }
+      int[] ret = new int[n];
+      for (int j = 0; j < n; j++){
+          ret[j] = containedPoints[j];
+      }
+      return ret;
     } else {
       return new int[]{0};
     }
