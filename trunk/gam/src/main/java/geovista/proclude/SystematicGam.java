@@ -30,15 +30,20 @@ public class SystematicGam extends AbstractGam{
 
   public Vector run(){
 //    System.out.println("Running Systematic GAM.");
+    
     Vector clusters = new Vector();    
-    for (int x = (int) Math.floor(initializer.getMinX()); x < initializer.getMaxX(); x++){
+    double xScale = (initializer.getMaxX() - initializer.getMinX())/100d;
+    double yScale = (initializer.getMaxY() - initializer.getMinY())/100d;
+    double xVal, yVal;
+    for (int x = 0; x < 100; x++){
       System.out.println("X: " + x);
-      for (int y = (int) Math.floor(initializer.getMinY()); y < initializer.getMaxY(); y++){
-//        System.out.println("Y: " + y);
+      xVal = initializer.getMinX() + (x * xScale);
+      for (int y = 0; y < 100; y++){
+        yVal = initializer.getMinY() + (y * yScale);
         for (int r1 = 1; r1 < (double) maxRadius/minRadius; r1++){
 //          for (int r2 = 1; r2 < maxRadius; r2++){
 //            System.out.println("radius is " + r1 * minRadius);
-            Gene hypothesis = new Gene(r1 * minRadius, r1 * minRadius, x, y, 0, fitnessFunction);
+            Gene hypothesis = new Gene(r1 * minRadius, r1 * minRadius, xVal, yVal, 0, fitnessFunction);
             double fitness = hypothesis.getFitness();
             if ((fitness >= minAccepted) && (hypothesis.getCount() >= minPoints)){
               clusters.add(hypothesis);
