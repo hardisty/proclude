@@ -228,7 +228,8 @@ public class RelocateDifference extends Relocation{
     boolean toBeReturned;
     if ((f instanceof FitnessAddRadii) ||
         (f instanceof FitnessOptimalArea) ||
-        (f instanceof FitnessOptimalRadius)){
+        (f instanceof FitnessOptimalRadius) ||
+        (f instanceof FitnessMonteCarlo)){
       double firstFitness = f.run(first);
       double isectFitness = f.run(isect);
       toBeReturned = (firstFitness > isectFitness);
@@ -277,7 +278,7 @@ public class RelocateDifference extends Relocation{
       double bottom = FitnessPoisson.fact(tarDiff);
       double poissonProb = top/bottom;
       toBeReturned = ((1 - poissonProb) > minFitness);
-    }
+    } 
     return toBeReturned;
   }
 
@@ -287,7 +288,8 @@ public class RelocateDifference extends Relocation{
     boolean toBeReturned;
     if ((f instanceof FitnessAddRadii) ||
         (f instanceof FitnessOptimalArea) ||
-        (f instanceof FitnessOptimalRadius)){
+        (f instanceof FitnessOptimalRadius) ||
+        (f instanceof FitnessMonteCarlo)){
       double firstFitness = f.run(first);
       double secondFitness = f.run(second);
       double unionFitness = f.run(union);
@@ -449,23 +451,23 @@ public class RelocateDifference extends Relocation{
           s2 = "isect";
         }
 
-        if ((s1 == "g") && (s2 == "isect")){   //g is better than isect, and isect is better than nextInList
+        if ((s1.equals("g")) && (s2.equals("isect"))){   //g is better than isect, and isect is better than nextInList
                              //replace nextInList with g
           removeList.add(nextInList);
 //          System.out.print("Replaced nextInList with new gene");
         }
-        if ((s1 == "isect") && (s2 == "nextInList")){  //nextInList is better than isect, and isect is better than g
+        if ((s1.equals("isect")) && (s2.equals("nextInList"))){  //nextInList is better than isect, and isect is better than g
          //do nothing
 //          System.out.print("Kept nextInList, and didn't add new gene.");
           addList.remove(g);
         }
-        if ((s1 == "isect") && (s2 == "isect")){    //isect is better than both nextInList and g
+        if ((s1.equals("isect")) && (s2.equals("isect"))){    //isect is better than both nextInList and g
           addList.remove(g);
           addList.add(isect);                       //replace nextInList with isect
           removeList.add(nextInList);
 //          System.out.print("Replaced nextInList with intersection.");
         }
-        if ((s1 == "g") && (s2 == "nextInList")){      //nextInList and g are both better than isect
+        if ((s1.equals("g")) && (s2.equals("nextInList"))){      //nextInList and g are both better than isect
           // COMPARE BOTH g AND nextInList WITH union
           if (!(unionCompare(g.getFunction(), g, nextInList, union, isect))){
             addList.remove(g);
