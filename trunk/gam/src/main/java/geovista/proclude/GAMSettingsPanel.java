@@ -44,7 +44,7 @@ public class GAMSettingsPanel extends JPanel implements ActionListener,
   private JFileChooser jfc;
   final String[] geneFeatures = {"Center X: ", "Center Y: ", "Horiz. Radius: ", "Vertical Radius: ", "Area: ", "Count: ", "Fitness: "};
   public static final String[] fitnesses = {"Optimal Radii Sum", "Density", "Max Fitness", "Optimal Area",
-                                            "Optimal Radius", "Obs - Exp", "Obs/Exp Ratio", "Poisson"};
+                                            "Optimal Radius", "Obs - Exp", "Obs/Exp Ratio", "Poisson", "Monte Carlo"};
   public static final String[] selections = {"Pairs of neighbors", "Probabilistic", "Random Elite"};
   public static final String[] survives = {"Compare two", "Elite N", "Relative Fitness"};
   public static final String[] crossovers = {"Any Mix", "Midline", "Midpoint", "Single Point"};
@@ -81,7 +81,7 @@ public class GAMSettingsPanel extends JPanel implements ActionListener,
   public static final String MAXGENS = "Maximum no. of generations:";
   public static final String STAGNANT = "Maximum no. of stagnant generations:";
   public static final String RELOCATE = "Relocation method:";
-
+  private FitnessMonteCarlo fmc = null;
 
 
 
@@ -334,6 +334,14 @@ public class GAMSettingsPanel extends JPanel implements ActionListener,
     dataSet = ndse.getDataSet();
     density = ndse.getDensity();
     init = ndse.getInitializer();
+    double xDim = init.getMaxX() - init.getMinX();
+    double yDim = init.getMaxY() - init.getMinY();
+    double minRad = 0.005*Math.min(xDim, yDim);
+    double maxRad = 0.2*Math.max(xDim, yDim);
+    minRadiusField.setValue(minRad);
+    maxRadiusField.setValue(maxRad);
+    mutSizeField.setValue((maxRad + minRad) / 2);
+    fmc = null;
     fireGAMSettings();
   }
 
@@ -430,8 +438,11 @@ public class GAMSettingsPanel extends JPanel implements ActionListener,
         } else if (values[index][1].equals(fitnesses[6])){
           fitFunMenu.setSelectedIndex(6);
           index++;
-        } else {
+        } else if (values[index][1].equals(fitnesses[7])){
           fitFunMenu.setSelectedIndex(7);
+          index++;
+        } else {
+          fitFunMenu.setSelectedIndex(8);
           index++;
         } //End fitness function assignment.  Begin selection assignment.
         if (values[index][1].equals(selections[0])){
@@ -716,6 +727,12 @@ public class GAMSettingsPanel extends JPanel implements ActionListener,
           break;
         case 7:
           fitnessFunction = new FitnessPoisson(dataSet, density);
+          break;
+        case 8:
+          if (fmc == null){
+            fmc = new FitnessMonteCarlo(dataSet);
+          } 
+          fitnessFunction = fmc;
           break;
       }
 
