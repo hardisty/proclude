@@ -202,7 +202,7 @@ public class GeneticGAM extends AbstractGam {
 
   private Vector step(){
 //    System.out.println();
-    System.out.println(generationCount);
+//    System.out.println(generationCount);
 //    System.out.println("The Population is:");
 //    System.out.println(population);
     

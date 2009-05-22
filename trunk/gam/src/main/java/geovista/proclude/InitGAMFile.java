@@ -311,7 +311,7 @@ public class InitGAMFile implements ActionListener {
       }
 
       public void fireAction(){
-          System.out.println("InitGAMFile is firing action.");
+//          System.out.println("InitGAMFile is firing action.");
           Object[] listeners = ell.getListenerList();
           int numListeners = listeners.length;
           ActionEvent sse = new ActionEvent(this, 42, "NEWDATA");
