@@ -13,9 +13,10 @@ public class FitnessAddRadii extends Fitness {
 
   private double optimalSum;
 
-  public FitnessAddRadii(Vector v, double d) {
+  public FitnessAddRadii(Vector v, double d, double d2) {
     dataSet = v;
     optimalSum = d;
+    minPts = d2;
   }
 
   /**
@@ -24,9 +25,13 @@ public class FitnessAddRadii extends Fitness {
    * the user-defined optimal radii sum.
    */
   
-  public double run(Gene g) {
+  public double run(Gene g) {      
       int c = count(g);
-      return 10 * c/(Math.max(1, population)) - 0.2 * Math.abs(optimalSum - g.getMajorAxisRadius() - g.getMinorAxisRadius());
+      if (c < minPts){
+          return -0.5;
+      } else {
+          return 10 * c/(Math.max(1, population)) - 0.2 * Math.abs(optimalSum - g.getMajorAxisRadius() - g.getMinorAxisRadius());
+      }
   }
  
   public String toString(){

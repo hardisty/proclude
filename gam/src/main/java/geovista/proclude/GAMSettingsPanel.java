@@ -7,6 +7,7 @@ package geovista.proclude;
  * @version 2.0
  */
 
+
 import geovista.readers.csv.CSVParser;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -705,32 +706,32 @@ public class GAMSettingsPanel extends JPanel implements ActionListener,
       Fitness fitnessFunction = null;
       switch (fitnessIndex){
         case 0:
-          fitnessFunction = new FitnessAddRadii(dataSet, optimum);
+          fitnessFunction = new FitnessAddRadii(dataSet, optimum, minPoints);
           break;
         case 1:
-          fitnessFunction = new FitnessDensity(dataSet);
+          fitnessFunction = new FitnessDensity(dataSet, minPoints);
           break;
         case 2:
-          fitnessFunction = new FitnessMaxAtN(dataSet, maxFitness);
+          fitnessFunction = new FitnessMaxAtN(dataSet, maxFitness, minPoints);
           break;
         case 3:
-          fitnessFunction = new FitnessOptimalArea(dataSet, optimum);
+          fitnessFunction = new FitnessOptimalArea(dataSet, optimum, minPoints);
           break;
         case 4:
-          fitnessFunction = new FitnessOptimalRadius(dataSet, optimum);
+          fitnessFunction = new FitnessOptimalRadius(dataSet, optimum, minPoints);
           break;
         case 5:
-          fitnessFunction = new FitnessRelative(dataSet);
+          fitnessFunction = new FitnessRelative(dataSet, minPoints);
           break;
         case 6:
-          fitnessFunction = new FitnessRelativePct(dataSet);
+          fitnessFunction = new FitnessRelativePct(dataSet, minPoints);
           break;
         case 7:
-          fitnessFunction = new FitnessPoisson(dataSet, density);
+          fitnessFunction = new FitnessPoisson(dataSet, density, minPoints);
           break;
         case 8:
           if (fmc == null){
-            fmc = new FitnessMonteCarlo(dataSet);
+            fmc = new FitnessMonteCarlo(dataSet, minPoints);
           } 
           fitnessFunction = fmc;
           break;

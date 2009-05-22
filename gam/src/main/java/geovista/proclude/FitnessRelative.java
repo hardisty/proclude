@@ -12,8 +12,9 @@ import java.util.Vector;
 
 public class FitnessRelative extends Fitness {
 
-  public FitnessRelative(Vector v) {
+  public FitnessRelative(Vector v, double d) {
     dataSet = v;
+    minPts = d;
   }
 
   /**
@@ -23,7 +24,11 @@ public class FitnessRelative extends Fitness {
    */
   public double run(Gene g){
     int c = count(g);
-    return (c - totalExpected);
+    if (c < minPts){
+        return -0.5;
+    } else {
+        return (c - totalExpected);
+    }
   }
 
   public String toString(){

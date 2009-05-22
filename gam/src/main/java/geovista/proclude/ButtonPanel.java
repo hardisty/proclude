@@ -8,13 +8,14 @@ package geovista.proclude;
  * @version 2.0
  */
 
+
+import geovista.readers.csv.CSVParser;
 import javax.swing.event.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.Vector;
 import java.io.*;
-import geovista.readers.csv.CSVParser;
 
 public class ButtonPanel extends JPanel implements ActionListener,
                                                    Serializable{

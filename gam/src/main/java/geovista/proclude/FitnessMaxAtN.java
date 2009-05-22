@@ -14,9 +14,10 @@ public class FitnessMaxAtN extends Fitness {
 
   private double maxFitness;
 
-  public FitnessMaxAtN(Vector v, double d) {
+  public FitnessMaxAtN(Vector v, double d, double d2) {
     dataSet = v;
     maxFitness = d;
+    minPts = d2;
   }
 
   /**
@@ -25,7 +26,11 @@ public class FitnessMaxAtN extends Fitness {
    */
   public double run(Gene g){
     int count = count(g);
-    return Math.min(maxFitness, 10 * (count)/(Math.max(1, population)));
+    if (count < minPts){
+        return -0.5;
+    } else {
+        return Math.min(maxFitness, 10 * (count)/(Math.max(1, population)));
+    }
   }
 
   /**

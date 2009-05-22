@@ -11,8 +11,9 @@ import java.util.Vector;
 
 public class FitnessDensity extends Fitness {
 
-  public FitnessDensity(Vector v) {
+  public FitnessDensity(Vector v, double d) {
     dataSet = v;
+    minPts = d;
   }
 
   /**
@@ -20,7 +21,11 @@ public class FitnessDensity extends Fitness {
    * the total population.
    */
   public double run(Gene g){
-    return 10 * (count(g))/(Math.max(1, population));
+      if (count(g) < minPts){
+          return -0.5;
+      } else {
+          return 10 * (count(g))/(Math.max(1, population));
+      }
   } 
 
   public String toString(){
