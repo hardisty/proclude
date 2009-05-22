@@ -14,9 +14,10 @@ public class FitnessOptimalArea extends Fitness {
 
   private double optimalArea;
 
-  public FitnessOptimalArea(Vector v, double d) {
+  public FitnessOptimalArea(Vector v, double d, double d2) {
     dataSet = v;
     optimalArea = d;
+    minPts = d2;
   }
 
   /**
@@ -25,8 +26,12 @@ public class FitnessOptimalArea extends Fitness {
    */
   public double run(Gene g){
     int count = count(g);
-    double area = Math.PI * g.getMajorAxisRadius() * g.getMinorAxisRadius();
-    return 10 * (count)/(Math.max(1, population)) - 0.2 * Math.abs(optimalArea - area);
+    if (count < minPts){
+        return -0.5;
+    } else {
+        double area = Math.PI * g.getMajorAxisRadius() * g.getMinorAxisRadius();
+        return 10 * (count)/(Math.max(1, population)) - 0.2 * Math.abs(optimalArea - area);
+    }
   }
 
   public String toString(){

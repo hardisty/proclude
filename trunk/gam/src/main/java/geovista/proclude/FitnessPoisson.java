@@ -15,26 +15,31 @@ public class FitnessPoisson extends Fitness{
 
   private double expectedDensity;
 
-  public FitnessPoisson(Vector v, double d) {
+  public FitnessPoisson(Vector v, double d, double d2) {
     dataSet = v;
     expectedDensity = d;
+    minPts = d2;
   }
 
   public double run(Gene g){
     int c = count(g);    
-//    System.out.println("Actual count = " + c);
-//    System.out.println("Expected count = " + expectedCount);
-    double top = ((Math.pow(Math.E,(0 - totalExpected)) * (Math.pow(totalExpected ,c))));
-    double bottom = fact(c);
-    double poissonProb = top/bottom;
-//    System.out.println("Top of the Poisson fraction is " + top);
-//    System.out.println("Bottom of the Poisson fraction is " + bottom);
-//    System.out.println("Probability (assuming Poisson distribution) of this happening is " + poissonProb);
-//    System.out.println("____________________________________________");
-    if ((c != 0) && (totalExpected != 0)){
-      return(1 - poissonProb);
+    if (c < minPts){
+        return -0.5;
     } else {
-      return 0;
+//        System.out.println("Actual count = " + c);
+//        System.out.println("Expected count = " + expectedCount);
+        double top = ((Math.pow(Math.E,(0 - totalExpected)) * (Math.pow(totalExpected ,c))));
+        double bottom = fact(c);
+        double poissonProb = top/bottom;
+//        System.out.println("Top of the Poisson fraction is " + top);
+//        System.out.println("Bottom of the Poisson fraction is " + bottom);
+//        System.out.println("Probability (assuming Poisson distribution) of this happening is " + poissonProb);
+//        System.out.println("____________________________________________");
+        if ((c != 0) && (totalExpected != 0)){
+          return(1 - poissonProb);
+        } else {
+          return 0;
+        }
     }
   }
 

@@ -8,6 +8,7 @@ package geovista.proclude;
  * @version 2.0
  */
 
+import geovista.common.event.DataSetEvent;
 import geovista.common.event.DataSetListener;
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,6 @@ import java.util.Vector;
 import java.util.Iterator;
 import java.io.*;
 import javax.swing.event.EventListenerList;
-import geovista.common.event.DataSetEvent;
 import java.awt.event.*;
 import com.vividsolutions.jts.geom.*;
 
@@ -47,7 +47,7 @@ public class OutputPanel extends JScrollPane implements NewDataSetListener,
     gamLabels = new Vector();
     createdLabels = new JPanel();
     setViewportView(entireView);
-    fitnessFunction = new FitnessDensity(new Vector());
+    fitnessFunction = new FitnessDensity(new Vector(), 15);
     outputList = new EventListenerList();
 //    this.setMaximumSize(new Dimension(2, 100));
     gamSet = -1;

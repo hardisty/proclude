@@ -22,8 +22,9 @@ public class FitnessMonteCarlo extends Fitness{
     int[][] monteCarloTargets;
     int[] counts;
     
-    public FitnessMonteCarlo(Vector v){
+    public FitnessMonteCarlo(Vector v, double d){
         dataSet = v;
+        minPts = d;
         monteCarloTargets = new int[99][v.size()];
         System.out.println("creating random datasets");
         for (int i = 0; i < monteCarloTargets.length; i++){
@@ -37,7 +38,9 @@ public class FitnessMonteCarlo extends Fitness{
     public double run(Gene g) {
         if (g.getPopulation() == 0){
             return -1;
-        } else {
+        } else if (count(g) < minPts) {
+            return -0.5;
+        } else {        
             double ret = 0;
             int myCount = count(g);
             counts[0] = myCount;

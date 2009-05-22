@@ -21,7 +21,7 @@ public abstract class Fitness {
   protected int[] containedPoints;
   protected boolean useContainedPoints = true;
   int population;
-  double totalExpected;
+  double totalExpected, minPts;
 
   public Fitness() {
   }

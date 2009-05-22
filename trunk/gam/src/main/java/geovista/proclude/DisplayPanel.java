@@ -49,7 +49,7 @@ public class DisplayPanel extends JPanel implements DisplaySettingsListener,
     private Fitness f;
     private Color bgColor, borderColor, dpColor, gsColor, csColor, cuColor;
     private Shape nullShape = new Ellipse2D.Double(0, 0, 0, 0);
-    private Gene nullGene = new Gene(0, 0, 0, 0, 0, new FitnessDensity(new Vector()));
+    private Gene nullGene = new Gene(0, 0, 0, 0, 0, new FitnessDensity(new Vector(), 15));
     private EventListenerList updateCreatedList = new EventListenerList();
     private EventListenerList updateGAMList = new EventListenerList();
     private Dimension area = new Dimension(0, 0);
@@ -75,7 +75,7 @@ public class DisplayPanel extends JPanel implements DisplaySettingsListener,
         active = -1;
         move = false;
         drawBorder = true;
-        f = new FitnessDensity(dataSet);
+        f = new FitnessDensity(dataSet, 15);
         activeCreated = nullShape;
         activeGenetic = nullGene;
         activeCreatedGene = nullGene;
