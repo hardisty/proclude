@@ -78,6 +78,10 @@ public class DataPoint extends Object{
   public int getTarget(){
     return target;
   }
+  
+    public void setTarget(int i){
+        target = i;
+    }
 
   public double getExpected(){
       return expected;
