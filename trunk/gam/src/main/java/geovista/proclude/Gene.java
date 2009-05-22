@@ -319,6 +319,22 @@ public class Gene{
     return ((double) Math.round(d * 100))/100;
   }
 
+    private double roundToSigDigs(double d, int digits){
+//        System.out.println("incoming: " + d);
+        if (d == 0){
+            return 0;
+        } else {
+            double log = Math.log10(d);
+            int digitsLeftOfDecimal = (int) Math.ceil(log);
+            int digitsToMoveLeft = digits - digitsLeftOfDecimal;
+            double movedD = d*Math.pow(10, digitsToMoveLeft);
+            double rounded = Math.rint(movedD);
+            double ret = rounded / Math.pow(10, digitsToMoveLeft);
+//            System.out.println("outgoing: " + ret);
+            return ret;
+        }
+    }  
+  
   /**
    *returns a shape representation of the gene.  Currently an orientated ellipse.
    */
@@ -338,10 +354,10 @@ public class Gene{
   public String toString(){
     String output = "X: " + roundToHundredths(x) + '\t' +
                     "Y: " + roundToHundredths(y) + '\t' +
-                    "Horiz. radius: " + roundToHundredths(major) + '\t' +
-                    "Vertical radius: " + roundToHundredths(minor) + '\t' +
+                    "Horiz. radius: " + roundToSigDigs(major, 2) + '\t' +
+                    "Vertical radius: " + roundToSigDigs(minor, 2) + '\t' +
                     "Orientation: " + roundToHundredths(orientation) + '\t' + 
-                    "Area: " + roundToHundredths(Math.PI * major * minor) + '\t' +
+                    "Area: " + roundToSigDigs(Math.PI * major * minor, 2) + '\t' +
                     "Population: " + population + '\t' +
                     "Target count: " + count + '\t' +
                     "Expected count: " + function.getTotalExpected() + '\t' +
@@ -357,10 +373,10 @@ public class Gene{
   public String toCSVString(){
     String output = "X: " + ',' + roundToHundredths(x) + ',' +
                     "Y: " +',' + roundToHundredths(y) + ',' +
-                    "Major axis radius: " + ',' + roundToHundredths(major) + ',' +
-                    "Minor axis radius: " + ',' + roundToHundredths(minor) + ',' +
+                    "Major axis radius: " + ',' + roundToSigDigs(major, 2) + ',' +
+                    "Minor axis radius: " + ',' + roundToSigDigs(minor, 2) + ',' +
                     "Orientation: " + ',' + roundToHundredths(orientation) + ',' +
-                    "Area: " + ',' + roundToHundredths(Math.PI * major * minor) + ',' +
+                    "Area: " + ',' + roundToSigDigs(Math.PI * major * minor, 2) + ',' +
                     "Population: " + ',' + population + ',' +
                     "Target count: " + ',' + count + ',' +
                     "Fitness: " + ',' + roundToHundredths(fitness) + "\n";
