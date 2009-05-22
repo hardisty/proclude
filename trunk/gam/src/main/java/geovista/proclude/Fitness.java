@@ -18,8 +18,8 @@ import java.util.Vector;
 public abstract class Fitness {
 
   Vector dataSet = new Vector();
-  private int[] containedPoints;
-  private boolean useContainedPoints = true;
+  protected int[] containedPoints;
+  protected boolean useContainedPoints = true;
   int population;
   double totalExpected;
 
