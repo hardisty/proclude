@@ -19,8 +19,8 @@ public class MutateLinearAmount extends Mutation{
   }
 
   /**
-   * Takes a gene and changes one of the four attributes (X, Y, horizontal radius
-   * and vertical radius) by an amount not exceeding the maximum fitness size.
+   * Takes a gene and changes one of the five attributes (X, Y, horizontal radius
+   * and vertical radius and orientation) by an amount not exceeding the maximum fitness size.
    */
 
   public Gene run(Gene g){
@@ -32,7 +32,7 @@ public class MutateLinearAmount extends Mutation{
         if (r.nextDouble() < 0.5)
           newValue = g.getMajorAxisRadius() + r.nextDouble() * mutationAmt;
         else
-          newValue = Math.max(1, g.getMajorAxisRadius() - r.nextDouble() * mutationAmt);
+          newValue = Math.max(mutationAmt/5, g.getMajorAxisRadius() - r.nextDouble() * mutationAmt);
         g.setMajorAxisRadius(newValue);
       }
         break;
@@ -41,7 +41,7 @@ public class MutateLinearAmount extends Mutation{
         if (r.nextDouble() < 0.5)
           newValue = g.getMinorAxisRadius() + r.nextDouble() * mutationAmt;
         else
-          newValue = Math.max(1, g.getMinorAxisRadius() - r.nextDouble() * mutationAmt);
+          newValue = Math.max(mutationAmt/5, g.getMinorAxisRadius() - r.nextDouble() * mutationAmt);
         g.setMinorAxisRadius(newValue);
       }
         break;

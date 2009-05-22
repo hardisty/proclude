@@ -53,7 +53,7 @@ public class MutateDecreasingWithTime extends Mutation{
         if (r.nextDouble() < 0.5)
           newValue = g.getMajorAxisRadius() + r.nextDouble() * mutationAmt;
         else
-          newValue = Math.max(1, g.getMajorAxisRadius() - r.nextDouble() * mutationAmt);
+          newValue = Math.max(mutationAmt/5, g.getMajorAxisRadius() - r.nextDouble() * mutationAmt);
         g.setMajorAxisRadius(newValue);
       }
         break;
@@ -62,7 +62,7 @@ public class MutateDecreasingWithTime extends Mutation{
         if (r.nextDouble() < 0.5)
           newValue = g.getMinorAxisRadius() + r.nextDouble() * mutationAmt;
         else
-          newValue = Math.max(1, g.getMinorAxisRadius() - r.nextDouble() * mutationAmt);
+          newValue = Math.max(mutationAmt/5, g.getMinorAxisRadius() - r.nextDouble() * mutationAmt);
         g.setMinorAxisRadius(newValue);
       }
         break;
