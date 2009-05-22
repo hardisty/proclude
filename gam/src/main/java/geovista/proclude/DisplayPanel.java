@@ -425,8 +425,8 @@ public class DisplayPanel extends JPanel implements DisplaySettingsListener,
         csColor = dse.getcsColor();
         cuColor = dse.getcuColor();
         scalingFactor = dse.getScalingFactor();
-        xOffset = 2 * scalingFactor - scalingFactor * minX;
-        yOffset = 2 * scalingFactor - scalingFactor * minY;
+        xOffset = 0 - scalingFactor * minX;
+        yOffset = 0 - scalingFactor * minY;
         borderWidth = dse.getBorderWidth();
         dpSize = dse.getdpSize();
         gsWidth = dse.getgsWidth();
@@ -733,8 +733,8 @@ public class DisplayPanel extends JPanel implements DisplaySettingsListener,
         } else {
             scalingFactor = (double) Math.max(0.01, (Math.round(initScalingFactor * 100) / 100));
         }
-        xOffset = 2 * scalingFactor - scalingFactor * minX;
-        yOffset = 2 * scalingFactor - scalingFactor * minY;
+        xOffset = scalingFactor * (0 - minX);
+        yOffset = scalingFactor * (0 - minY);        
         System.out.println("Scaling factor is: " + scalingFactor);
         System.out.println("X offset is: " + xOffset);
         System.out.println("Y offset is: " + yOffset);
